@@ -1,0 +1,10 @@
+# Compiled python modules.
+*.pyc
+/genembs/data/triple_list_211209.feather
+/genembs/data/connected_nodes_list.feather
+
+# Setuptools distribution folder.
+/dist/
+
+# Python egg metadata, regenerated from source files by setuptools.
+/*.egg-info
