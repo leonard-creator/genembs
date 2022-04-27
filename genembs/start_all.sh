@@ -7,12 +7,13 @@
 #SBATCH -p gpu
 #SBATCH --mem=100G
 #SBATCH --time 96:00:0
-#SBATCH --job-name="TransE"
+#SBATCH --job-name="TransE_batch"
 #SBATCH --output=/home/tilingl/Pykeen/outputs/emb_fullv3%j.out
-EXP_NAME="TransE" # ComplEx_dimTest
+EXP_NAME="TransE_batch" # ComplEx_dimTest
 EXP_FOLDER="TransE"
 RUN_PATH="/home/tilingl/Pykeen/New_Embedding_Stuff/Embedding_out"
-PARAMETERS_ARRAY=(True TransE 1024 SLCWATrainingLoop 'TransEv3.pt' 'TransE_full_v3' '-l None' '--batch_size None' '--sub_batch_size NOne' '--slize_size None') 
+ # triple_path, inverse, Model, emb_dim, Training_loop, check_name, embedding_dict_Name, batch_size, sub_batch_size, slice_size,  Loss=None
+PARAMETERS_ARRAY=(True TransE 1024 SLCWATrainingLoop 'TransEv3_batch.pt' $EXP_NAME '-l None' '--batch_size None' '--sub_batch_size NOne' '--slize_size None') 
 # indices 0 to 9
 
 prep_experiment() {
@@ -57,7 +58,7 @@ echo "\n"
 # NEW: name with v for mark as comparable Data version
 NAME="emb_run_thesis_$EXP_NAME" #for wandb!
 FEATHER=".feather"
-EMB_PATH="//home/tilingl/Pykeen/New_Embedding_Stuff/Embeddings/Embedding_dict_$EXP_NAME$FEATHER"
+EMB_PATH="/home/tilingl/Pykeen/New_Embedding_Stuff/Embeddings/Embedding_dict_$EXP_NAME$FEATHER"
 
 conda deactivate
 echo "SLURM_JOBID="$SLURM_JOBID
@@ -72,8 +73,9 @@ echo "environment: ehgraphs2"
 
 #start embedding evaluation
 # NEW: leonard_thesis -> Updatet graph and graphdata with data version 0
+# shared Emb Folder: /sc-projects/sc-proj-ukb-cvd/data/2_datasets_pre/220208_graphembeddings/embeddings/TransE_1024.feather
 
-python /home/tilingl/ehrgraphs/ehrgraphs/scripts/train_recordgraphs.py setup.name=$NAME user_config=/home/tilingl/ehrgraphs/config/experiments/graphembeddings_leonard_thesis_220421.yaml datamodule.load_embeddings_path=/sc-projects/sc-proj-ukb-cvd/data/2_datasets_pre/220208_graphembeddings/embeddings/TransE_1024.feather setup.tags='["leonard_thesis:v0", "first_test"]' 
+python /home/tilingl/ehrgraphs/ehrgraphs/scripts/train_recordgraphs.py setup.name=$NAME user_config=/home/tilingl/ehrgraphs/config/experiments/graphembeddings_leonard_thesis_220421.yaml datamodule.load_embeddings_path=$EMB_PATH setup.tags='["leonard_thesis:v0", "first_test"]' 
 
 
 
