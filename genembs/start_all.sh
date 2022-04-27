@@ -1,17 +1,19 @@
 #! /bin/sh
 
 #S #BATCH --gres=gpu:nvidia_a100-sxm-80gb:1
-#S #BATCH --gres=gpu:1
-#S #BATCH -N 1-1
-#S #BATCH --cpus-per-gpu=128
-#SBATCH -p compute
-#SBATCH --mem=200G
+#SBATCH --gres=gpu:1
+#SBATCH -N 1-1
+#SBATCH --cpus-per-gpu=128
+#SBATCH -p gpu
+#SBATCH --mem=100G
 #SBATCH --time 96:00:0
-#SBATCH --job-name="TESTA"
-#SBATCH --output=/home/tilingl/Pykeen/outputs/emb%j.out
-EXP_NAME="ConvE" # ComplEx_dimTest
-EXP_FOLDER="Transe_test"
+#SBATCH --job-name="TransE"
+#SBATCH --output=/home/tilingl/Pykeen/outputs/emb_fullv3%j.out
+EXP_NAME="TransE" # ComplEx_dimTest
+EXP_FOLDER="TransE"
 RUN_PATH="/home/tilingl/Pykeen/New_Embedding_Stuff/Embedding_out"
+PARAMETERS_ARRAY=(True TransE 1024 SLCWATrainingLoop 'TransEv3.pt' 'TransE_full_v3' '-l None' '--batch_size None' '--sub_batch_size NOne' '--slize_size None') 
+# indices 0 to 9
 
 prep_experiment() {
     EXPERIMENT_HOME=$1 #/home/tilingl/Pykeen/New_Embedding_Stuff/Evaluation_out
@@ -30,7 +32,7 @@ prep_experiment() {
 }
 
 # creating links and folder structure
-prep_experiment $RUN_PATH $EXP_FOLDER $EXP_NAME emb$SLURM_JOB_ID.out 
+prep_experiment $RUN_PATH $EXP_FOLDER $EXP_NAME emb_fullv3$SLURM_JOB_ID.out 
 
 source /home/tilingl/.bashrc
 #start shared env
@@ -43,14 +45,17 @@ echo "with $(python -c "import torch; print(torch.cuda.device_count())") gpus"
 echo "specifically GPUs $CUDA_VISIBLE_DEVICES"
 
 # add argparser for detailled configuration
-NAME=Model_$EXP_NAME.py
-python /home/tilingl/Pykeen/New_Embedding_Stuff/$NAME
+# could print out all changed arguments e.g. tuning parameter
+
+#python /home/tilingl/Pykeen/New_Embedding_Stuff/$NAME
+
+python /home/tilingl/Pykeen/New_Embedding_Stuff/BA\automatization/auto_generate_embs.py ${PARAMETERS_ARRAY[0]} ${PARAMETERS_ARRAY[1} ${PARAMETERS_ARRAY[2]} ${PARAMETERS_ARRAY[3]} ${PARAMETERS_ARRAY[4]} ${PARAMETERS_ARRAY[5]} ${PARAMETERS_ARRAY[6]} ${PARAMETERS_ARRAY[7]} ${PARAMETERS_ARRAY[8]} ${PARAMETERS_ARRAY[9]}
 
 
 echo "Starting to evaluate Embedding."
 echo "\n"
 # NEW: name with v for mark as comparable Data version
-NAME="emb_run_v_$EXP_NAME" #for wandb!
+NAME="emb_run_thesis_$EXP_NAME" #for wandb!
 FEATHER=".feather"
 EMB_PATH="//home/tilingl/Pykeen/New_Embedding_Stuff/Embeddings/Embedding_dict_$EXP_NAME$FEATHER"
 
@@ -65,9 +70,11 @@ echo "environment: ehgraphs2"
 # adapt runpath for Eval. output
 #RUN_PATH="/home/tilingl/Pykeen/New_Embedding_Stuff/Evaluation_out"
 
-#start python command
+#start embedding evaluation
 # NEW: leonard_thesis -> Updatet graph and graphdata with data version 0
 
-python /home/tilingl/ehrgraphs/ehrgraphs/scripts/train_recordgraphs.py setup.name=$NAME user_config=/home/tilingl/ehrgraphs/config/experiments/graphembeddings_leonard_thesis_220421.yaml datamodule.load_embeddings_path=/sc-projects/sc-proj-ukb-cvd/data/2_datasets_pre/220208_graphembeddings/embeddings/TransE_1024.feather setup.tags='["leonard_thesis:v0", "batch_test"]' 
+python /home/tilingl/ehrgraphs/ehrgraphs/scripts/train_recordgraphs.py setup.name=$NAME user_config=/home/tilingl/ehrgraphs/config/experiments/graphembeddings_leonard_thesis_220421.yaml datamodule.load_embeddings_path=/sc-projects/sc-proj-ukb-cvd/data/2_datasets_pre/220208_graphembeddings/embeddings/TransE_1024.feather setup.tags='["leonard_thesis:v0", "first_test"]' 
+
+
 
 echo "Done with submission script"
