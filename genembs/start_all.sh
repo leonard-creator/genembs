@@ -5,16 +5,14 @@
 #SBATCH -N 1-1
 #SBATCH --cpus-per-gpu=128
 #SBATCH -p gpu
-#SBATCH --mem=100G
+#SBATCH --mem=200G
 #SBATCH --time 96:00:0
-#SBATCH --job-name="TransE_batch"
+#SBATCH --job-name="RotatE"
 #SBATCH --output=/home/tilingl/Pykeen/outputs/emb_fullv3%j.out
-EXP_NAME="TransE_batch" # ComplEx_dimTest
-EXP_FOLDER="TransE"
+EXP_NAME="RotatE" # ComplEx_dimTest
+EXP_FOLDER="RotatE"
 RUN_PATH="/home/tilingl/Pykeen/New_Embedding_Stuff/Embedding_out"
- # triple_path, inverse, Model, emb_dim, Training_loop, check_name, embedding_dict_Name, batch_size, sub_batch_size, slice_size,  Loss=None
-PARAMETERS_ARRAY=(True TransE 1024 SLCWATrainingLoop 'TransEv3_batch.pt' $EXP_NAME '-l None' '--batch_size None' '--sub_batch_size NOne' '--slize_size None') 
-# indices 0 to 9
+
 
 prep_experiment() {
     EXPERIMENT_HOME=$1 #/home/tilingl/Pykeen/New_Embedding_Stuff/Evaluation_out
@@ -48,17 +46,17 @@ echo "specifically GPUs $CUDA_VISIBLE_DEVICES"
 # add argparser for detailled configuration
 # could print out all changed arguments e.g. tuning parameter
 
-#python /home/tilingl/Pykeen/New_Embedding_Stuff/$NAME
-
-python /home/tilingl/Pykeen/New_Embedding_Stuff/BA\automatization/auto_generate_embs.py ${PARAMETERS_ARRAY[0]} ${PARAMETERS_ARRAY[1} ${PARAMETERS_ARRAY[2]} ${PARAMETERS_ARRAY[3]} ${PARAMETERS_ARRAY[4]} ${PARAMETERS_ARRAY[5]} ${PARAMETERS_ARRAY[6]} ${PARAMETERS_ARRAY[7]} ${PARAMETERS_ARRAY[8]} ${PARAMETERS_ARRAY[9]}
-
+# ------------------------------------------------------------------------------------------------------------------------ #
+ # inverse, Model, emb_dim, Training_loop, check_name, embedding_dict_Name, batch_size(-b), sub_batch_size(-sb), slice_size(-s),  Loss(-l)
+python /home/tilingl/Pykeen/New_Embedding_Stuff/BA_automatization/auto_generate_embs.py True RotatE 512 SLCWATrainingLoop 'RotatE_default.pt' $EXP_NAME -b 32768
+# ------------------------------------------------------------------------------------------------------------------------ #
 
 echo "Starting to evaluate Embedding."
 echo "\n"
 # NEW: name with v for mark as comparable Data version
 NAME="emb_run_thesis_$EXP_NAME" #for wandb!
 FEATHER=".feather"
-EMB_PATH="/home/tilingl/Pykeen/New_Embedding_Stuff/Embeddings/Embedding_dict_$EXP_NAME$FEATHER"
+EMB_PATH="/sc-projects/sc-proj-ukb-cvd/data/2_datasets_pre/220208_graphembeddings/embeddings_leonard/Embedding_dict_$EXP_NAME$FEATHER"
 
 conda deactivate
 echo "SLURM_JOBID="$SLURM_JOBID
@@ -74,9 +72,9 @@ echo "environment: ehgraphs2"
 #start embedding evaluation
 # NEW: leonard_thesis -> Updatet graph and graphdata with data version 0
 # shared Emb Folder: /sc-projects/sc-proj-ukb-cvd/data/2_datasets_pre/220208_graphembeddings/embeddings/TransE_1024.feather
-
-python /home/tilingl/ehrgraphs/ehrgraphs/scripts/train_recordgraphs.py setup.name=$NAME user_config=/home/tilingl/ehrgraphs/config/experiments/graphembeddings_leonard_thesis_220421.yaml datamodule.load_embeddings_path=$EMB_PATH setup.tags='["leonard_thesis:v0", "first_test"]' 
-
+# ------------------------------------------------------------------------------------------------------------------------------ #
+python /home/tilingl/ehrgraphs/ehrgraphs/scripts/train_recordgraphs.py setup.name=$NAME user_config=/home/tilingl/ehrgraphs/config/experiments/graphembeddings_leonard_thesis_220421.yaml datamodule.load_embeddings_path=$EMB_PATH setup.tags='["leonard_thesis:v0", "baseline",  "-dim 512", "32768"]' 
+# ------------------------------------------------------------------------------------------------------------------------------ #
 
 
 echo "Done with submission script"
