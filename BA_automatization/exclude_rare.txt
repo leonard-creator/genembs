@@ -1,0 +1,94 @@
+RxNorm - SNOMED eq
+SNOMED - RxNorm eq
+Has surgical appr
+Surgical appr of
+Indir morph of
+Has indir morph
+Has modification
+Modification of
+Priority of
+Has priority
+Has intended site
+Intended site of
+Using energy
+Energy used by
+Has proc device
+Proc device of
+Has admin method
+Has release charact
+Release charact of
+Admin method of
+CVX - RxNorm
+RxNorm - CVX
+Has basic dose form
+Has transformation
+Basic dose form of
+Transformation of
+Has dose form
+Dose form of
+Has finding site
+Finding site of
+Is characterized by
+Characterizes
+Has trade family grp
+Trade family grp of
+During
+Has complication
+Flavor of
+Has flavor
+Plays role
+Role played by
+Basis str subst of
+Has basis str subst
+Technique of
+Has technique
+Has proc morph
+Proc morph of
+Scale type of
+Has scale type
+Process output of
+Has process output
+Property of
+Proc duration of
+Has property
+Has proc duration
+ATC - SNOMED eq
+SNOMED - ATC eq
+Has recipient cat
+Recipient cat of
+Indir device of
+Has indir device
+Has state of matter
+State of matter of
+Has interpretation
+Interpretation of
+Has active ing
+Comp material of
+Active ing of
+Has comp material
+Has disposition
+Disposition of
+Has severity
+Severity of
+Has component
+Component of
+Has temp finding
+Temp related to
+Has manifestation
+Manifestation of
+Has excipient
+Excipient of
+Filling of
+Has filling
+Has dir proc site
+Dir proc site of
+Surf character of
+Has surface char
+Relative to of
+Relative to
+Time aspect of
+Laterality of
+Has laterality
+Has time aspect
+is location of
+is located at

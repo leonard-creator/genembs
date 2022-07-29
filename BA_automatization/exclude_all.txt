@@ -1,0 +1,204 @@
+Interacts with
+Is associated with
+Subsumes
+Is a
+SNOMED to Phecode
+Phecode to SNOMED
+RxNorm is a
+RxNorm inverse is a
+Has AMP
+AMP of
+Is descendant of
+Is ancestor of
+Tradename of 
+Has tradename 
+RxNorm has ing 
+RxNorm ing of 
+Consists of 
+Constitutes 
+Has asso morph 
+Asso morph of 
+Has method 
+Method of 
+Is part of 
+Composed of 
+ATC - RxNorm sec up 
+RxNorm - ATC sec up 
+Dose form group of 
+Has dose form group 
+Has interprets 
+Interprets of 
+ATC - RxNorm 
+RxNorm - ATC 
+Has pathology 
+Pathology of 
+Has occurrence 
+Occurrence of 
+Is indicated for 
+Can be treated with 
+Has causative agent 
+Causative agent of 
+Has due to 
+Due to of 
+Has dir morph 
+Dir morph of 
+Has spec active ing 
+Spec active ing of 
+Has temporal context 
+Temporal context of 
+Has relat context 
+Relat context of 
+Has intent 
+Intent of 
+Quantified form of 
+Has quantified form 
+Has VMP 
+VMP of 
+ATC - RxNorm pr lat 
+RxNorm - ATC pr lat 
+Using finding method 
+Finding method of 
+Maps to 
+Mapped from 
+Has clinical course 
+Clinical course of 
+Has focus 
+Focus of 
+Dir device of 
+Has dir device 
+Has proc context 
+Proc context of 
+Phecode to Phecode top 
+Phecode top to Phecode 
+ATC - RxNorm pr up 
+RxNorm - ATC pr up 
+Has dir subst 
+Dir subst of 
+Using subst 
+Subst used by 
+Asso finding of 
+Has asso finding 
+Has finding context 
+Finding context of 
+Asso proc of 
+Has asso proc 
+Occurs after 
+Occurs before 
+Contained in 
+Contains 
+Can target 
+Is targeted by 
+Is child of 
+Is parent of 
+Followed by 
+Follows 
+Using finding inform 
+Finding inform of 
+Finding asso with 
+Asso with finding 
+Using acc device 
+Acc device used by 
+Has access 
+Access of 
+ATC - RxNorm sec lat 
+RxNorm - ATC sec lat 
+Has revision status 
+Revision status of 
+Has prod character 
+Prod character of 
+Has disp dose form 
+Disp dose form of 
+RxNorm - SNOMED eq 
+SNOMED - RxNorm eq 
+Has surgical appr 
+Surgical appr of 
+Indir morph of 
+Has indir morph 
+Has modification 
+Modification of 
+Priority of 
+Has priority 
+Has intended site 
+Intended site of 
+Using energy 
+Energy used by 
+Has proc device 
+Proc device of 
+Has admin method 
+Has release charact 
+Release charact of 
+Admin method of 
+CVX - RxNorm 
+RxNorm - CVX 
+Has basic dose form 
+Has transformation
+Basic dose form of
+Transformation of
+Has dose form
+Dose form of
+Has finding site
+Finding site of
+Is characterized by
+Characterizes
+Has trade family grp
+Trade family grp of
+During
+Has complication
+Flavor of
+Has flavor
+Plays role
+Role played by
+Basis str subst of
+Has basis str subst
+Technique of
+Has technique
+Has proc morph
+Proc morph of
+Scale type of
+Has scale type
+Process output of
+Has process output
+Property of
+Proc duration of 150
+Has property 150
+Has proc duration 150
+ATC - SNOMED eq 119
+SNOMED - ATC eq 119
+Has recipient cat 115
+Recipient cat of 115
+Indir device of 78
+Has indir device 78
+Has state of matter 58
+State of matter of 58
+Has interpretation 56
+Interpretation of 56
+Has active ing 51
+Comp material of 51
+Active ing of 51
+Has comp material 51
+Has disposition 41
+Disposition of 41
+Has severity 38
+Severity of 38
+Has component 32
+Component of 32
+Has temp finding 30
+Temp related to 30
+Has manifestation 12
+Manifestation of 12
+Has excipient 8
+Excipient of 8
+Filling of 7
+Has filling 7
+Has dir proc site 6
+Dir proc site of 6
+Surf character of 4
+Has surface char 4
+Relative to of 3
+Relative to 3
+Time aspect of 2
+Laterality of 2
+Has laterality 2
+Has time aspect 2
+is location of 1
+is located at 1

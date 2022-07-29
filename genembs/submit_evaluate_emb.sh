@@ -1,11 +1,12 @@
 #! /bin/sh
-#SBATCH --gres=gpu:2
+
+#SBATCH --gres=gpu:1
 #SBATCH -N 1-1
 #SBATCH --cpus-per-gpu=32
-#SBATCH -p gpu --gres=gpu:1
-#SBATCH --mem=64G
-#SBATCH --time 96:00:0
-#SBATCH --job-name="create Embedding TEST"
+#SBATCH -p gpu
+#SBATCH --mem=200G
+#SBATCH --time 24:00:0
+#SBATCH --job-name="Complex_batch"
 #SBATCH --output=/home/tilingl/Pykeen/outputs/eval_emb%j.out
 
 echo Starting to create Embedding.
@@ -14,8 +15,8 @@ echo $(hostname)
 echo $(which python) 
 echo environment: ehgraphs2
 
-EXP_NAME="RotatE_t2_test" #!!specify version f.e. baseline / t1 /t2
-EXP_FOLDER="RotatE_test" # do not addapt _t1 _t2 just base name 
+EXP_NAME="ComplEx_batch" #!!specify version f.e. baseline / t1 /t2
+EXP_FOLDER="ComplEx" # do not addapt _t1 _t2 just base name 
 RUN_PATH="/home/tilingl/Pykeen/New_Embedding_Stuff/Evaluation_out"
 DATE=$( date '+%F' )
 NOW=$( date '+%F' )
@@ -51,8 +52,9 @@ prep_experiment() {
 # creating links and folder structure
 prep_experiment $RUN_PATH $EXP_FOLDER $EXP_NAME
 
+# NEW: name with v for mark as comparable Data version
 source /home/tilingl/.bashrc
-NAME="emb_run_$EXP_NAME"
+NAME="emb_run_v_$EXP_NAME"
 #NAME="graph_embs2_mlpH_$EXP_NAME"
 FEATHER=".feather"
 EMB_PATH="//home/tilingl/Pykeen/New_Embedding_Stuff/Embeddings/Embedding_dict_$EXP_NAME$FEATHER"
@@ -67,8 +69,8 @@ echo "with $(python -c "import torch; print(torch.cuda.device_count())") gpus"
 echo "specifically GPUs $CUDA_VISIBLE_DEVICES"
 
 #start python command
-# multiple flags??
 ##python /home/tilingl/python_test.py
-python /home/tilingl/ehrgraphs/ehrgraphs/scripts/train_recordgraphs.py model=graph_embeddings head=mlp training.gradient_checkpointing=False setup.name=$NAME setup.tags=["freshStart"] datamodule.load_embeddings_path=$EMB_PATH
+# NEW: add specific Data_identifier
+python /home/tilingl/ehrgraphs/ehrgraphs/scripts/train_recordgraphs.py model=graph_embeddings head=mlp training.gradient_checkpointing=False setup.name=$NAME setup.tags='["freshStart", "v19", "batch_test"]' setup.data_identifier='WandBGraphDataNoShortcuts256:v19' datamodule.load_embeddings_path=$EMB_PATH
 echo Tags: freshstart, $EXP_NAME
 echo "Done with submission script"

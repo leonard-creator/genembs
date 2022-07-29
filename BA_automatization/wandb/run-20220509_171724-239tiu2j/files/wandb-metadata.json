@@ -1,0 +1,22 @@
+{
+    "os": "Linux-4.18.0-240.el8.x86_64-x86_64-with-glibc2.28",
+    "python": "3.9.7",
+    "heartbeatAt": "2022-05-09T15:17:29.679309",
+    "startedAt": "2022-05-09T15:17:24.988270",
+    "docker": null,
+    "gpu": "NVIDIA A100-PCIE-40GB",
+    "gpu_count": 1,
+    "cpu_count": 128,
+    "cuda": null,
+    "args": [
+        "setup.name=emb_run_thesis_orthogonal",
+        "user_config=/home/tilingl/ehrgraphs/config/experiments/graphembeddings_leonard_thesis_220421.yaml",
+        "datamodule.load_embeddings_path=/sc-projects/sc-proj-ukb-cvd/data/2_datasets_pre/220208_graphembeddings/embeddings/Embedding_dict_orthogonal.feather",
+        "setup.tags=[\"leonard_thesis:v0\", \"random-Orthogonal\",  \"-dim 1024\"]"
+    ],
+    "state": "running",
+    "program": "/home/tilingl/ehrgraphs/ehrgraphs/scripts/train_recordgraphs.py",
+    "host": "s-sc-gpu009",
+    "username": "tilingl",
+    "executable": "/home/tilingl/miniconda3/envs/ehrgraphs2/bin/python"
+}

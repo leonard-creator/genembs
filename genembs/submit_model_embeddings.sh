@@ -1,15 +1,16 @@
 #! /bin/sh
 
+#S #BATCH --gres=gpu:nvidia_a100-sxm-80gb:1
 #SBATCH --gres=gpu:1
 #SBATCH -N 1-1
-#SBATCH --cpus-per-gpu=32
+#SBATCH --cpus-per-gpu=128
 #SBATCH -p gpu
-#SBATCH --mem=64G
+#SBATCH --mem=200G
 #SBATCH --time 24:00:0
-#SBATCH --job-name="RotatE"
+#SBATCH --job-name="TEST"
 #SBATCH --output=/home/tilingl/Pykeen/outputs/create_emb%j.out
-EXP_NAME=
-EXP_FOLDER=
+EXP_NAME="TransE" # ComplEx_dimTest
+EXP_FOLDER="ConvE_Test"
 RUN_PATH="/home/tilingl/Pykeen/New_Embedding_Stuff/Embedding_out"
 
 prep_experiment() {
@@ -35,14 +36,14 @@ prep_experiment $RUN_PATH $EXP_FOLDER $EXP_NAME
 source /home/tilingl/.bashrc
 #start shared env
 conda activate /sc-projects/sc-proj-ukb-cvd/environments/gnn
-echo "Starting python"
+echo "Starting python "
 echo "Executing on $(hostname)"
 echo "in $(which python)"
 echo "with $(python -c "import torch; print(torch.cuda.device_count())") gpus"
 echo "specifically GPUs $CUDA_VISIBLE_DEVICES"
 
 # add argparser
-NAME=MODEL_$EXP_NAME.py
+NAME=Model_$EXP_NAME.py
 python /home/tilingl/Pykeen/New_Embedding_Stuff/$NAME
 
 echo "Done with submission script"
